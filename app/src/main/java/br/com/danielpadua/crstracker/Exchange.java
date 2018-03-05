@@ -1,22 +1,33 @@
 package br.com.danielpadua.crstracker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by danielpadua on 13/02/2018.
  */
 
-public class Exchange {
+class Exchange implements Serializable {
     private ArrayList<Pair> supportedPairs;
+    private int id;
     private String name;
 
-    public Exchange() {
+    Exchange() {
         setSupportedPairs(new ArrayList<Pair>());
     }
 
-    public Exchange(ArrayList<Pair> supportedPairs, String name) {
+    Exchange(ArrayList<Pair> supportedPairs, int id, String name) {
         setSupportedPairs(supportedPairs);
+        setId(id);
         setName(name);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ArrayList<Pair> getSupportedPairs() {
@@ -37,12 +48,9 @@ public class Exchange {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Exchange: " + getName());
-        for (Pair p : getSupportedPairs()) {
-            sb.append("CRS/").append(p.getCoin().toString()).append(": ").append(p.getPrice());
-        }
-        return sb.toString();
+        return getName();
     }
+
 
 
 }

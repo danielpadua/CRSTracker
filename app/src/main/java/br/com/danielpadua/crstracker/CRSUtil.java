@@ -8,14 +8,18 @@ import java.util.ArrayList;
 
 class CRSUtil {
 
-    public static final int CRS_DEFAULT_REQUEST_TIMEOUT = 7000;
+    static final int CRS_DEFAULT_REQUEST_TIMEOUT = 10000;
 
-    public static final Exchange[] supportedExchanges = {
+    static final String CRS_WIDGET_PREFERENCES = "CRS_WIDGET_PREFERENCES";
+
+    static final Exchange[] supportedExchanges = {
             new Exchange(new ArrayList<Pair>() {{
-                add(new Pair(SupportedCoins.BTC, "https://www.southxchange.com/api/price/CRS/BTC", null, null, null));
-                add(new Pair(SupportedCoins.USD, "https://www.southxchange.com/api/price/CRS/USD", null, null, null));
-            }}, "Southxchange")
-    };
+                add(new Pair(1, SupportedCoins.BTC, "https://www.southxchange.com/api/price/CRS/BTC", null, null, null, -1, "https://www.southxchange.com/Market/Book/CRS/BTC"));
+                add(new Pair(2, SupportedCoins.BRL, "https://api.blinktrade.com/api/v1/BRL/ticker?crypto_currency=BTC", null, null, null, -1, null));
+                add(new Pair(3, SupportedCoins.USD, "https://www.southxchange.com/api/price/CRS/USD", null, null, null, -1, "https://www.southxchange.com/Market/Book/CRS/USD"));
+                add(new Pair(4, SupportedCoins.DASH, "https://www.southxchange.com/api/price/CRS/DASH", null, null, null, -1, "https://www.southxchange.com/Market/Book/CRS/DASH"));
+            }}, 1, "Southxchange")};
+
 
     public static int getTotalPairCount() {
         int pairCount = 0;

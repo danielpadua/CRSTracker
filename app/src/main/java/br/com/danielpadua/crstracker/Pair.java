@@ -1,65 +1,102 @@
 package br.com.danielpadua.crstracker;
 
+import java.io.Serializable;
+
 /**
  * Created by danielpadua on 13/02/2018.
  */
 
-class Pair {
+class Pair implements Serializable {
+    private int id;
     private SupportedCoins coin;
     private String apiURL;
     private String price;
     private String volume;
     private String variation;
+    private int widgetId;
+    private String pairURL;
 
-    public Pair() {
+    Pair() {
     }
 
-    public Pair(SupportedCoins coin, String apiURL, String price, String volume, String variation) {
+    Pair(int id, SupportedCoins coin, String apiURL, String price, String volume, String variation, int widgetId, String pairURL) {
+        setId(id);
         setCoin(coin);
         setApiURL(apiURL);
         setPrice(price);
         setVolume(volume);
         setVariation(variation);
+        setWidgetId(widgetId);
+        setPairURL(pairURL);
     }
 
-    public SupportedCoins getCoin() {
+    int getId() {
+        return id;
+    }
+
+    void setId(int id) {
+        this.id = id;
+    }
+
+    SupportedCoins getCoin() {
         return coin;
     }
 
-    public void setCoin(SupportedCoins coin) {
+    void setCoin(SupportedCoins coin) {
         this.coin = coin;
     }
 
-    public String getApiURL() {
+    String getApiURL() {
         return apiURL;
     }
 
-    public void setApiURL(String apiURL) {
+    void setApiURL(String apiURL) {
         this.apiURL = apiURL;
     }
 
-    public String getPrice() {
+    String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    void setPrice(String price) {
         this.price = price;
     }
 
-    public String getVolume() {
+    String getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    void setVolume(String volume) {
         this.volume = volume;
     }
 
-    public String getVariation() {
+    String getVariation() {
         return variation;
     }
 
-    public void setVariation(String variation) {
+    void setVariation(String variation) {
         this.variation = variation;
+    }
+
+    int getWidgetId() {
+        return widgetId;
+    }
+
+    void setWidgetId(int widgetId) {
+        this.widgetId = widgetId;
+    }
+
+    String getPairURL() {
+        return pairURL;
+    }
+
+    void setPairURL(String pairURL) {
+        this.pairURL = pairURL;
+    }
+
+    @Override
+    public String toString() {
+        return "CRS/" + getCoin().toString();
     }
 
 

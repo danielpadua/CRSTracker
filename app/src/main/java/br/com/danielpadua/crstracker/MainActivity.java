@@ -18,12 +18,16 @@ public class MainActivity extends AppCompatActivity implements OnTaskCompleted {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.lv = findViewById(R.id.lvCRSExchanges);
-
         new PriceUpdateTask(this, this).execute();
     }
 
     @Override
     public void onTaskCompleted() {
+        onTaskCompleted(null);
+    }
+
+    @Override
+    public void onTaskCompleted(int[] widgetIds) {
         this.lv.setAdapter(new CRSExchangeAdapter(getBaseContext(), new ArrayList<>(Arrays.asList(supportedExchanges))));
     }
 }

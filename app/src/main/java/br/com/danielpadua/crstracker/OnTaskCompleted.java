@@ -6,4 +6,6 @@ package br.com.danielpadua.crstracker;
 
 interface OnTaskCompleted {
     void onTaskCompleted();
+
+    void onTaskCompleted(int[] widgetIds);
 }

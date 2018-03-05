@@ -3,9 +3,9 @@
     package="br.com.danielpadua.crstracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -14,6 +14,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
@@ -23,13 +24,14 @@
                 <data
                     android:host="crstracker"
                     android:scheme="example" />
-                <!--<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />-->
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <receiver
-            android:name="CRSTrackerWidgetProvider"
+            android:name=".CRSTrackerWidgetProvider"
+            android:exported="true"
             android:label="CRS Tracker">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -41,6 +43,13 @@
         </receiver>
 
 
+        <activity
+            android:name=".ConfigureWidget"
+            android:label="Configurar CRS Widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

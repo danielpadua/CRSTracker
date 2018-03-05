@@ -6,5 +6,7 @@ package br.com.danielpadua.crstracker;
 
 public enum SupportedCoins {
     BTC,
-    USD
+    USD,
+    BRL,
+    DASH
 }
