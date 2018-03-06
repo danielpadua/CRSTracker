@@ -185,7 +185,7 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements OnTas
                         line3Label = "Var.24h: ";
                         line3Value = e.getSupportedPairs().get(0).getVariation();
                         this.remoteViews.setTextColor(R.id.widgetLine3Value, color);
-                        this.remoteViews.setTextColor(R.id.widgetLine2Value, context.getResources().getColor(android.R.color.holo_blue_dark));
+                        this.remoteViews.setTextColor(R.id.widgetLine2Value, Color.BLUE);
 
                     } else {
                         line1Label = "Preço: ";
@@ -193,7 +193,7 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements OnTas
                         line2Label = "Var.24h: ";
                         line2Value = p.getVariation();
                         this.remoteViews.setTextColor(R.id.widgetLine2Value, color);
-                        this.remoteViews.setTextColor(R.id.widgetLine3Value, context.getResources().getColor(android.R.color.holo_blue_dark));
+                        this.remoteViews.setTextColor(R.id.widgetLine3Value, Color.BLUE);
                         line3Label = "Vol.24h: ";
                         line3Value = p.getVolume();
                     }
@@ -223,6 +223,18 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements OnTas
             }
 
             Toast.makeText(this.context, "CRS Atualizado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onTaskTimeout(int[] widgetIds) {
+        this.remoteViews.setTextViewText(R.id.txvAtualizando, "Erro de conexão! Atualize novamente.");
+        this.intent.setAction(ACTION_APPWIDGET_UPDATE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 1, this.intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        this.remoteViews.setOnClickPendingIntent(R.id.widgetAtualizar, pendingIntent);
+        for (int widgetId : widgetIds) {
+            this.appWidgetManager.updateAppWidget(widgetId, this.remoteViews);
         }
     }
 }

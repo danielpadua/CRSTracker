@@ -8,4 +8,6 @@ interface OnTaskCompleted {
     void onTaskCompleted();
 
     void onTaskCompleted(int[] widgetIds);
+
+    void onTaskTimeout(int[] widgetIds);
 }

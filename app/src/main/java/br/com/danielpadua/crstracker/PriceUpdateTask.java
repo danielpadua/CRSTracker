@@ -27,8 +27,8 @@ import static br.com.danielpadua.crstracker.CRSUtil.supportedExchanges;
 
 class PriceUpdateTask extends AsyncTask<Void, Void, Void> {
 
-    private final Context context;
-    private final OnTaskCompleted listener;
+    private Context context;
+    private OnTaskCompleted listener;
     private int[] widgetIds;
     private int requestCounter;
     private Pair btcPair;
@@ -74,8 +74,8 @@ class PriceUpdateTask extends AsyncTask<Void, Void, Void> {
                                             brlPair = p;
                                         } else {
 
-                                            double last = response.get("Last").toString() != "null" ? Double.parseDouble(response.get("Last").toString()) : 0.0;
-                                            double variation24Hr = response.get("Variation24Hr").toString() != "null" ? Double.parseDouble(response.get("Variation24Hr").toString()) : 0.0;
+                                            double last = !response.get("Last").toString().equals("null") ? Double.parseDouble(response.get("Last").toString()) : 0.0;
+                                            double variation24Hr = !response.get("Variation24Hr").toString().equals("null") ? Double.parseDouble(response.get("Variation24Hr").toString()) : 0.0;
                                             double volume24Hr = Double.parseDouble(response.get("Volume24Hr").toString());
                                             if (p.getCoin() == SupportedCoins.USD)
                                                 p.setPrice(String.format(Locale.ROOT, "%.2f", last).replace(",", "."));
@@ -111,7 +111,12 @@ class PriceUpdateTask extends AsyncTask<Void, Void, Void> {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.e("Volley", error.toString());
+                                if (error.networkResponse == null) {
+                                    //if (error.getClass().equals(TimeoutError.class)) {
+                                    listener.onTaskTimeout(widgetIds);
+                                    return;
+                                    //}
+                                }
                             }
                         }
                 );
