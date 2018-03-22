@@ -19,10 +19,10 @@
             </intent-filter>
 
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"></action>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"></category>
-                <category android:name="android.intent.category.BROWSABLE"></category>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:host="https://github.com/danielpadua/crstracker"
                     android:pathPrefix="/projects/crstracker"
@@ -32,7 +32,7 @@
         </activity>
 
         <receiver
-            android:name=".CRSTrackerWidgetProvider"
+            android:name=".widget.CRSTrackerWidgetProvider"
             android:exported="true"
             android:label="CRS Tracker">
             <intent-filter>
@@ -46,7 +46,7 @@
 
 
         <activity
-            android:name=".ConfigureWidget"
+            android:name=".widget.ConfigureWidget"
             android:label="Configurar CRS Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
