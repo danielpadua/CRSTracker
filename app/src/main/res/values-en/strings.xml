@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Global -->
+    <string name="app_name">CRS Tracker</string>
+    <string name="configure_title">Configure CRS Widget</string>
+
+    <!-- Main Screen -->
+    <string name="main_relative_pair">Relative Pair</string>
+
+    <!-- Configure Widget Screen -->
+    <string name="configure_widget_exchange_label">Exchange</string>
+    <string name="configure_widget_pair_label">Pair</string>
+    <string name="configure_widget_interval_label">Interval</string>
+    <string name="configure_widget_data_title">Data to be displayed</string>
+    <string name="configure_widget_line1_label">Line 1</string>
+    <string name="configure_widget_line2_label">Line 2</string>
+    <string name="configure_widget_line3_label">Line 3</string>
+    <string name="configure_widget_configure_button">Configure</string>
+
+    <!-- Widget Layout -->
+    <string name="widget_updating">Updating…</string>
+
+    <!-- InfoOption -->
+    <string name="infoOption_price">Price</string>
+    <string name="infoOption_bid">Bid</string>
+    <string name="infoOption_ask">Ask</string>
+    <string name="infoOption_volume">Volume</string>
+    <string name="infoOption_variation">Variation</string>
+    <string name="infoOption_high">High</string>
+    <string name="infoOption_low">Low</string>
+    <string name="infoOption_trade_count">Trade Count</string>
+    <string name="infoOption_btc_price">BTC Price</string>
+    <string name="infoOption_empty" />
+
+    <!-- Errors -->
+    <string name="error_communication">Communication error</string>
+</resources>

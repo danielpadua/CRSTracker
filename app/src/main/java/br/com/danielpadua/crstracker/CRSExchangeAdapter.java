@@ -17,7 +17,6 @@ import br.com.danielpadua.crstracker.model.pair.Pair;
 import br.com.danielpadua.crstracker.model.pair.RealPair;
 import br.com.danielpadua.crstracker.model.pair.RelativePair;
 
-import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_PRICE_ERROR;
 import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_TICKER_LABEL;
 import static br.com.danielpadua.crstracker.util.CRSUtil.JSON_TICKER_24H_LABEL;
 import static br.com.danielpadua.crstracker.util.CRSUtil.formatCryptoPrice;
@@ -81,11 +80,11 @@ class CRSExchangeAdapter extends BaseAdapter {
                     } else {
                         RelativePair relativePair = (RelativePair) p;
                         price = formatFiatPrice(relativePair.getCrsPrice());
-                        relativePairMessage = " - Par Relativo";
+                        relativePairMessage = " - " + mInflater.getContext().getString(R.string.main_relative_pair);
                     }
                     sb.append("CRS/").append(p.getCoin()).append(": ").append(price).append(relativePairMessage).append(p != Iterables.getLast(lstExchanges.get(position).getSupportedPairs()) ? System.getProperty("line.separator") : "");
                 } else if (tickerPrice.getTickerLabel().equals(EXCEPTION_TICKER_LABEL)) {
-                    sb.append("CRS/").append(p.getCoin()).append(": ").append(EXCEPTION_PRICE_ERROR).append(p != Iterables.getLast(lstExchanges.get(position).getSupportedPairs()) ? System.getProperty("line.separator") : "");
+                    sb.append("CRS/").append(p.getCoin()).append(": ").append(mInflater.getContext().getString(R.string.error_communication)).append(p != Iterables.getLast(lstExchanges.get(position).getSupportedPairs()) ? System.getProperty("line.separator") : "");
                 }
             }
         }

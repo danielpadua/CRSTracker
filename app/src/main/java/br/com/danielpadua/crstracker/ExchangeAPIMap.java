@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.danielpadua.crstracker.model.CrsInfoListener;
+import br.com.danielpadua.crstracker.model.exchange.CFinex;
+import br.com.danielpadua.crstracker.model.exchange.Crex24;
 import br.com.danielpadua.crstracker.model.exchange.Exchange;
-import br.com.danielpadua.crstracker.model.exchange.Southxchange;
+import br.com.danielpadua.crstracker.restClient.CFinexRestClient;
+import br.com.danielpadua.crstracker.restClient.Crex24RestClient;
 import br.com.danielpadua.crstracker.restClient.RestClient;
-import br.com.danielpadua.crstracker.restClient.SouthxchangeRestClient;
 
 /**
  * Created by danielpadua on 14/03/2018.
@@ -18,7 +20,9 @@ import br.com.danielpadua.crstracker.restClient.SouthxchangeRestClient;
 public final class ExchangeAPIMap {
     public static Map<Exchange, RestClient> getMap(final Context context, final CrsInfoListener infoListener) {
         return new HashMap<Exchange, RestClient>() {{
-            put(new Southxchange(), new SouthxchangeRestClient(context, infoListener));
+            //put(new Southxchange(), new SouthxchangeRestClient(context, infoListener));
+            put(new CFinex(), new CFinexRestClient(context, infoListener));
+            put(new Crex24(), new Crex24RestClient(context, infoListener));
         }};
     }
 

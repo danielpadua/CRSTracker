@@ -1,3 +1,36 @@
 <resources>
+    <!-- Global -->
     <string name="app_name">CRS Tracker</string>
+    <string name="configure_title">Configurar CRS Widget</string>
+
+    <!-- Main Screen -->
+    <string name="main_relative_pair">Par Relativo</string>
+
+    <!-- Configure Widget Screen -->
+    <string name="configure_widget_exchange_label">Exchange</string>
+    <string name="configure_widget_pair_label">Par</string>
+    <string name="configure_widget_interval_label">Intervalo</string>
+    <string name="configure_widget_data_title">Informações a serem exibidas</string>
+    <string name="configure_widget_line1_label">Linha 1</string>
+    <string name="configure_widget_line2_label">Linha 2</string>
+    <string name="configure_widget_line3_label">Linha 3</string>
+    <string name="configure_widget_configure_button">Configurar</string>
+
+    <!-- Widget Layout -->
+    <string name="widget_updating">Atualizando…</string>
+
+    <!-- InfoOption -->
+    <string name="infoOption_price">Preço</string>
+    <string name="infoOption_bid">Bid</string>
+    <string name="infoOption_ask">Ask</string>
+    <string name="infoOption_volume">Volume</string>
+    <string name="infoOption_variation">Variação</string>
+    <string name="infoOption_high">High</string>
+    <string name="infoOption_low">Low</string>
+    <string name="infoOption_trade_count">Qtde Trades</string>
+    <string name="infoOption_btc_price">Preço BTC</string>
+    <string name="infoOption_empty" />
+
+    <!-- Errors -->
+    <string name="error_communication">Erro de comunicação</string>
 </resources>

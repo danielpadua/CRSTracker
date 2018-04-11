@@ -21,8 +21,9 @@ import java.util.Map;
 import br.com.danielpadua.crstracker.ExchangeAPIMap;
 import br.com.danielpadua.crstracker.R;
 import br.com.danielpadua.crstracker.model.TickerType;
+import br.com.danielpadua.crstracker.model.exchange.CFinex;
+import br.com.danielpadua.crstracker.model.exchange.Crex24;
 import br.com.danielpadua.crstracker.model.exchange.Exchange;
-import br.com.danielpadua.crstracker.model.exchange.Southxchange;
 import br.com.danielpadua.crstracker.model.pair.Pair;
 import br.com.danielpadua.crstracker.model.pair.RealPair;
 import br.com.danielpadua.crstracker.model.pair.RelativePair;
@@ -131,19 +132,49 @@ public class ConfigureWidget extends AppCompatActivity implements WidgetInfoList
         // View Rules
 
         // Southxchange Rules
-        if (selectedExchange instanceof Southxchange &&
-                (selectedPair instanceof RealPair && (!selectedPair.getCoin().equals("BRL"))) ||
-                (selectedPair instanceof RelativePair && (!selectedPair.getCoin().equals("BRL")))) {
+        /*if (selectedExchange instanceof Southxchange && selectedPair instanceof RealPair) {
             availableOptions.add(InfoOption.Price);
             availableOptions.add(InfoOption.Bid);
             availableOptions.add(InfoOption.Ask);
             availableOptions.add(InfoOption.Variation);
             availableOptions.add(InfoOption.Volume);
         } else if (selectedExchange instanceof Southxchange &&
-                (selectedPair instanceof RelativePair && selectedPair.getCoin().equals("BRL"))) {
+                selectedPair instanceof RelativePair && selectedPair.getCoin().equals("BRL")) {
             availableOptions.add(InfoOption.Price);
             availableOptions.add(InfoOption.BtcPrice);
             availableOptions.add(InfoOption.Volume);
+        } else if (selectedExchange instanceof Southxchange &&
+                selectedPair instanceof RelativePair && selectedPair.getCoin().equals("USD")) {
+            availableOptions.add(InfoOption.Price);
+            availableOptions.add(InfoOption.BtcPrice);
+            availableOptions.add(InfoOption.Volume);
+        // CFinex Rules
+        } else */
+        if (selectedExchange instanceof CFinex && selectedPair instanceof RealPair) {
+            availableOptions.add(InfoOption.Price);
+            availableOptions.add(InfoOption.Bid);
+            availableOptions.add(InfoOption.Ask);
+            availableOptions.add(InfoOption.Variation);
+            availableOptions.add(InfoOption.Volume);
+            availableOptions.add(InfoOption.Empty);
+            // Crex24 Rules
+        } else if (selectedExchange instanceof Crex24 && selectedPair instanceof RealPair) {
+            availableOptions.add(InfoOption.Price);
+            availableOptions.add(InfoOption.High);
+            availableOptions.add(InfoOption.Low);
+            availableOptions.add(InfoOption.Variation);
+            availableOptions.add(InfoOption.Volume);
+            availableOptions.add(InfoOption.Empty);
+            // BRL Bitvalor Any Exchange
+        } else if (selectedPair instanceof RelativePair && selectedPair.getCoin().equals("BRL")) {
+            availableOptions.add(InfoOption.Price);
+            availableOptions.add(InfoOption.BtcPrice);
+            availableOptions.add(InfoOption.Empty);
+            // USDT Binance Any Exchange
+        } else if (selectedPair instanceof RelativePair && selectedPair.getCoin().equals("USDT")) {
+            availableOptions.add(InfoOption.Price);
+            availableOptions.add(InfoOption.BtcPrice);
+            availableOptions.add(InfoOption.Empty);
         }
 
         this.infoOptionsAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,

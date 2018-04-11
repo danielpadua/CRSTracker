@@ -63,7 +63,7 @@ public class Southxchange extends Exchange {
 
     @Override
     public int getRefreshCooldownSeconds() {
-        return 10;
+        return GLOBAL_SOUTHXCHANGE_API_CALL_TIMER;
     }
 
     @Override

@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_margin="8dip"
         android:gravity="center"
-        android:text="Atualizando"
+        android:text="@string/widget_updating"
         android:textColor="@android:color/black"
         android:textSize="12sp"
         android:textStyle="bold" />
@@ -120,7 +120,6 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:layout_marginTop="-54dp"
-            android:contentDescription="Ir para Exchange"
             android:src="@android:drawable/ic_search_category_default"
             android:tint="@android:color/black" />
 
@@ -132,7 +131,6 @@
         android:layout_height="30dp"
         android:layout_gravity="end"
         android:layout_marginTop="-32dp"
-        android:contentDescription="Atualizar"
         android:src="@android:drawable/stat_notify_sync"
         android:tint="@android:color/black" />
 

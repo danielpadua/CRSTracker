@@ -3,6 +3,8 @@ package br.com.danielpadua.crstracker.model.pair;
 import java.util.Date;
 import java.util.List;
 
+import br.com.danielpadua.crstracker.CRSTracker;
+import br.com.danielpadua.crstracker.R;
 import br.com.danielpadua.crstracker.model.TickerPrice;
 
 /**
@@ -46,6 +48,6 @@ public class RelativePair extends Pair {
 
     @Override
     public String toString() {
-        return "CRS/" + getCoin() + " - Par Relativo";
+        return "CRS/" + getCoin() + " - " + CRSTracker.getAppContext().getString(R.string.main_relative_pair);
     }
 }

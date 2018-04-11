@@ -95,6 +95,7 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements Widge
                     }
                     for (int id : ids) {
                         this.remoteViews = new RemoteViews(context.getPackageName(), R.layout.crs_widget_layout);
+                        this.remoteViews.setTextViewText(R.id.txvAtualizando, "Atualizando");
                         this.remoteViews.setViewVisibility(R.id.txvAtualizando, View.VISIBLE);
                         this.remoteViews.setViewVisibility(R.id.linWidgetDados, View.GONE);
                         this.appWidgetManager = AppWidgetManager.getInstance(context);
@@ -231,12 +232,22 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements Widge
                     this.remoteViews.setTextViewText(R.id.widgetLine1Value, line1Value);
                 } else if (order == 1) {
                     line2Label = "Val: ";
-                    line2Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLast()) : formatFiatPrice(chosenTickerPrice.getLast());
+                    if (pair instanceof RelativePair) {
+                        RelativePair relativePair = (RelativePair) pair;
+                        line2Value = !isFiat ? formatCryptoPrice(relativePair.getCrsPrice()) : formatFiatPrice(relativePair.getCrsPrice());
+                    } else {
+                        line2Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLast()) : formatFiatPrice(chosenTickerPrice.getLast());
+                    }
                     this.remoteViews.setTextViewText(R.id.widgetLine2Label, line2Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine2Value, line2Value);
                 } else if (order == 2) {
                     line3Label = "Val: ";
-                    line3Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLast()) : formatFiatPrice(chosenTickerPrice.getLast());
+                    if (pair instanceof RelativePair) {
+                        RelativePair relativePair = (RelativePair) pair;
+                        line3Value = !isFiat ? formatCryptoPrice(relativePair.getCrsPrice()) : formatFiatPrice(relativePair.getCrsPrice());
+                    } else {
+                        line3Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLast()) : formatFiatPrice(chosenTickerPrice.getLast());
+                    }
                     this.remoteViews.setTextViewText(R.id.widgetLine3Label, line3Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine3Value, line3Value);
                 }
@@ -406,6 +417,24 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements Widge
                 } else if (order == 2) {
                     line3Label = "Trad: ";
                     line3Value = String.valueOf(chosenTickerPrice.getTradeCount());
+                    this.remoteViews.setTextViewText(R.id.widgetLine3Label, line3Label);
+                    this.remoteViews.setTextViewText(R.id.widgetLine3Value, line3Value);
+                }
+                break;
+            case Empty:
+                if (order == 0) {
+                    line1Label = "";
+                    line1Value = "";
+                    this.remoteViews.setTextViewText(R.id.widgetLine1Label, line1Label);
+                    this.remoteViews.setTextViewText(R.id.widgetLine1Value, line1Value);
+                } else if (order == 1) {
+                    line2Label = "";
+                    line2Value = "";
+                    this.remoteViews.setTextViewText(R.id.widgetLine2Label, line2Label);
+                    this.remoteViews.setTextViewText(R.id.widgetLine2Value, line2Value);
+                } else if (order == 2) {
+                    line3Label = "";
+                    line3Value = "";
                     this.remoteViews.setTextViewText(R.id.widgetLine3Label, line3Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine3Value, line3Value);
                 }

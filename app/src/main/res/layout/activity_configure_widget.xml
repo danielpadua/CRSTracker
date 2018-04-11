@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exchange" />
+                android:text="@string/configure_widget_exchange_label" />
 
         </TableRow>
 
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Par" />
+                android:text="@string/configure_widget_pair_label" />
         </TableRow>
 
         <TableRow
@@ -65,7 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Intervalo" />
+                android:text="@string/configure_widget_interval_label" />
         </TableRow>
 
         <TableRow
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
-                android:text="Informações a serem exibidas" />
+                android:text="@string/configure_widget_data_title" />
         </TableRow>
 
         <TableRow
@@ -100,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Linha 1" />
+                android:text="@string/configure_widget_line1_label" />
         </TableRow>
 
         <TableRow
@@ -122,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Linha 2" />
+                android:text="@string/configure_widget_line2_label" />
         </TableRow>
 
         <TableRow
@@ -144,7 +144,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Linha 3" />
+                android:text="@string/configure_widget_line3_label" />
         </TableRow>
 
         <TableRow
@@ -167,7 +167,7 @@
                 android:id="@+id/btnConfigure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Configurar" />
+                android:text="@string/configure_widget_configure_button" />
         </TableRow>
     </TableLayout>
 </android.widget.LinearLayout>

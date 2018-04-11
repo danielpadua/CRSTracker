@@ -22,17 +22,17 @@ import java.util.concurrent.TimeoutException;
 import br.com.danielpadua.crstracker.model.CrsInfoListener;
 import br.com.danielpadua.crstracker.model.MainInfoListener;
 import br.com.danielpadua.crstracker.model.TickerPrice;
+import br.com.danielpadua.crstracker.model.exchange.Crex24;
 import br.com.danielpadua.crstracker.model.exchange.Exchange;
-import br.com.danielpadua.crstracker.model.exchange.Southxchange;
 import br.com.danielpadua.crstracker.model.pair.Pair;
 import br.com.danielpadua.crstracker.model.pair.RealPair;
 import br.com.danielpadua.crstracker.model.pair.RelativePair;
 import br.com.danielpadua.crstracker.model.widget.WidgetInfoListener;
 import br.com.danielpadua.crstracker.model.widget.WidgetTracker;
+import br.com.danielpadua.crstracker.restClient.jsonParser.BinanceJsonParser;
 import br.com.danielpadua.crstracker.restClient.jsonParser.BitvalorJsonParser;
+import br.com.danielpadua.crstracker.restClient.jsonParser.Crex24JsonParser;
 import br.com.danielpadua.crstracker.restClient.jsonParser.CrsJsonParser;
-import br.com.danielpadua.crstracker.restClient.jsonParser.SouthxchangeJsonParser;
-import br.com.danielpadua.crstracker.util.CRSUtil;
 
 import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_PATTERN_API_INVALID_JSON;
 import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_PATTERN_API_NOT_TREATED;
@@ -41,16 +41,11 @@ import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_PATTERN_API_T
 import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_TICKER_DESCRIPTION;
 import static br.com.danielpadua.crstracker.util.CRSUtil.EXCEPTION_TICKER_LABEL;
 import static br.com.danielpadua.crstracker.util.CRSUtil.GLOBAL_DEFAULT_TIMEOUT_SECONDS;
-import static br.com.danielpadua.crstracker.util.CRSUtil.SHARED_PREFERENCES_SOUTHXCHANGE;
+import static br.com.danielpadua.crstracker.util.CRSUtil.SHARED_PREFERENCES_CREX24;
 
-/**
- * Created by danielpadua on 11/03/2018.
- */
-
-public class SouthxchangeRestClient extends RestClient<Southxchange> {
-
-    public SouthxchangeRestClient(Context context, CrsInfoListener infoListener) {
-        super(context, infoListener, Southxchange.class);
+public class Crex24RestClient extends RestClient<Crex24> {
+    public Crex24RestClient(Context context, CrsInfoListener infoListener) {
+        super(context, infoListener, Crex24.class);
     }
 
     @Override
@@ -59,32 +54,31 @@ public class SouthxchangeRestClient extends RestClient<Southxchange> {
             super.widgetTracker = widgetTrackers[0];
         }
 
-        Southxchange southxchange = repository.get(CRSUtil.SHARED_PREFERENCES_SOUTHXCHANGE);
+        Crex24 crex24 = repository.get(SHARED_PREFERENCES_CREX24);
 
-        if (southxchange == null) {
-            southxchange = new Southxchange();
-            southxchange = (Southxchange) updateExchange(southxchange);
-            southxchange.setLastUpdated(new Date());
-            repository.persist(SHARED_PREFERENCES_SOUTHXCHANGE, southxchange);
+        if (crex24 == null) {
+            crex24 = new Crex24();
+            crex24 = (Crex24) updateExchange(crex24);
+            crex24.setLastUpdated(new Date());
+            repository.persist(SHARED_PREFERENCES_CREX24, crex24);
         } else {
-            long duration = (new Date().getTime() - southxchange.getLastUpdated().getTime());
-            long cooldown = TimeUnit.MILLISECONDS.convert(southxchange.getRefreshCooldownSeconds(), TimeUnit.SECONDS);
+            long duration = (new Date().getTime() - crex24.getLastUpdated().getTime());
+            long cooldown = TimeUnit.MILLISECONDS.convert(crex24.getRefreshCooldownSeconds(), TimeUnit.SECONDS);
             if (duration > cooldown) {
-                southxchange = new Southxchange();
+                crex24 = new Crex24();
             }
-            southxchange = (Southxchange) updateExchange(southxchange);
-            southxchange.setLastUpdated(new Date());
-            repository.persist(SHARED_PREFERENCES_SOUTHXCHANGE, southxchange);
+            crex24 = (Crex24) updateExchange(crex24);
+            crex24.setLastUpdated(new Date());
+            repository.persist(SHARED_PREFERENCES_CREX24, crex24);
         }
 
-
-        return southxchange;
+        return crex24;
     }
 
     @Override
     protected Exchange updateExchange(Exchange exchange) {
-        Southxchange southxchange = new Southxchange();
-        southxchange.getSupportedPairs().clear();
+        Crex24 crex24 = new Crex24();
+        crex24.getSupportedPairs().clear();
         for (Pair pair : exchange.getSupportedPairs()) {
             long cooldown = TimeUnit.MILLISECONDS.convert(pair.getApiCooldownSeconds(), TimeUnit.SECONDS);
             long duration = 0;
@@ -94,7 +88,7 @@ public class SouthxchangeRestClient extends RestClient<Southxchange> {
                 cooldown = 0;
             }
             if (duration < cooldown) {
-                southxchange.getSupportedPairs().add(pair);
+                crex24.getSupportedPairs().add(pair);
             } else {
                 RequestFuture<JSONObject> future = RequestFuture.newFuture();
                 JsonObjectRequest request = new JsonObjectRequest(pair.getApiURL(), null, future, future);
@@ -104,12 +98,12 @@ public class SouthxchangeRestClient extends RestClient<Southxchange> {
                     JSONObject response = future.get(GLOBAL_DEFAULT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
 
                     if (pair instanceof RealPair) {
-                        pair = updatePair(pair, response, new SouthxchangeJsonParser());
+                        pair = updatePair(pair, response, new Crex24JsonParser());
                     } else {
                         if (pair.getCoin().equals("BRL")) {
                             pair = updatePair((RelativePair) pair, exchange.getBitcoinPair(), response, new BitvalorJsonParser());
                         } else {
-                            pair = updatePair((RelativePair) pair, exchange.getBitcoinPair(), response, new SouthxchangeJsonParser());
+                            pair = updatePair((RelativePair) pair, exchange.getBitcoinPair(), response, new BinanceJsonParser());
                         }
                     }
                     pair.setLastUpdated(new Date());
@@ -138,11 +132,11 @@ public class SouthxchangeRestClient extends RestClient<Southxchange> {
                     pair = setPairTickerPriceErrorValues(pair);
                     super.errors.add(new CrsRestException(errorMessage, e));
                 } finally {
-                    southxchange.getSupportedPairs().add(pair);
+                    crex24.getSupportedPairs().add(pair);
                 }
             }
         }
-        return southxchange;
+        return crex24;
     }
 
     @Override
