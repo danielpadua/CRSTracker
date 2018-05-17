@@ -15,6 +15,7 @@ public class CRSUtil {
     public static final int GLOBAL_SOUTHXCHANGE_API_CALL_TIMER = 10; // Seconds
     public static final int GLOBAL_CFINEX_API_CALL_TIMER = 10; // Seconds
     public static final int GLOBAL_CREX24_API_CALL_TIMER = 10; // Seconds
+    public static final int GLOBAL_FXCBIT_API_CALL_TIMER = 10; // Seconds
     public static final int GLOBAL_BITVALOR_API_CALL_TIMER = 60; // Seconds
     public static final int GLOBAL_BINANCE_API_CALL_TIMER = 15; // Seconds
     public static final String GLOBAL_DEFAULT_24H_TICKER_DESCRIPTION = "24 horas";
@@ -29,6 +30,7 @@ public class CRSUtil {
     public static final String SHARED_PREFERENCES_SOUTHXCHANGE = "SOUTHXCHANGE";
     public static final String SHARED_PREFERENCES_CFINEX = "CFINEX";
     public static final String SHARED_PREFERENCES_CREX24 = "CREX24";
+    public static final String SHARED_PREFERENCES_FXCBIT = "FXCBIT";
 
 
     ///////////////////////////////////
@@ -76,6 +78,9 @@ public class CRSUtil {
     public static final String JSON_CREX24_PERCENT_CHANGE_LABEL = "PercentChange";
     public static final String JSON_CREX24_VOLUME_LABEL = "VolumeInBtc";
 
+    // FXCBit
+    public static final String JSON_FXCBIT_LAST_LABEL = "crsbrl";
+
     // Bitvalor
     public static final String JSON_BITVALOR_TICKER24H_LABEL = "ticker_24h";
     public static final String JSON_BITVALOR_TICKER12H_LABEL = "ticker_12h";
@@ -92,7 +97,7 @@ public class CRSUtil {
 
 
     public static Double validateNullDoubleAPI(String apiOutput) {
-        return apiOutput.equals("null") ? 0 : Double.parseDouble(apiOutput);
+        return apiOutput.equals("null") ? 0 : Double.parseDouble(apiOutput.replace(",", "."));
     }
 
     public static String formatCryptoPrice(Double price) {

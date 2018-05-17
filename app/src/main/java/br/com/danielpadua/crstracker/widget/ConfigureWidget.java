@@ -24,6 +24,7 @@ import br.com.danielpadua.crstracker.model.TickerType;
 import br.com.danielpadua.crstracker.model.exchange.CFinex;
 import br.com.danielpadua.crstracker.model.exchange.Crex24;
 import br.com.danielpadua.crstracker.model.exchange.Exchange;
+import br.com.danielpadua.crstracker.model.exchange.FXCBit;
 import br.com.danielpadua.crstracker.model.pair.Pair;
 import br.com.danielpadua.crstracker.model.pair.RealPair;
 import br.com.danielpadua.crstracker.model.pair.RelativePair;
@@ -150,13 +151,13 @@ public class ConfigureWidget extends AppCompatActivity implements WidgetInfoList
             availableOptions.add(InfoOption.Volume);
         // CFinex Rules
         } else */
+
         if (selectedExchange instanceof CFinex && selectedPair instanceof RealPair) {
             availableOptions.add(InfoOption.Price);
             availableOptions.add(InfoOption.Bid);
             availableOptions.add(InfoOption.Ask);
             availableOptions.add(InfoOption.Variation);
             availableOptions.add(InfoOption.Volume);
-            availableOptions.add(InfoOption.Empty);
             // Crex24 Rules
         } else if (selectedExchange instanceof Crex24 && selectedPair instanceof RealPair) {
             availableOptions.add(InfoOption.Price);
@@ -164,18 +165,20 @@ public class ConfigureWidget extends AppCompatActivity implements WidgetInfoList
             availableOptions.add(InfoOption.Low);
             availableOptions.add(InfoOption.Variation);
             availableOptions.add(InfoOption.Volume);
-            availableOptions.add(InfoOption.Empty);
+            // FXCBit Rules
+        } else if (selectedExchange instanceof FXCBit && selectedPair instanceof RealPair) {
+            availableOptions.add(InfoOption.Price);
             // BRL Bitvalor Any Exchange
         } else if (selectedPair instanceof RelativePair && selectedPair.getCoin().equals("BRL")) {
             availableOptions.add(InfoOption.Price);
             availableOptions.add(InfoOption.BtcPrice);
-            availableOptions.add(InfoOption.Empty);
             // USDT Binance Any Exchange
         } else if (selectedPair instanceof RelativePair && selectedPair.getCoin().equals("USDT")) {
             availableOptions.add(InfoOption.Price);
             availableOptions.add(InfoOption.BtcPrice);
-            availableOptions.add(InfoOption.Empty);
         }
+
+        availableOptions.add(InfoOption.Empty);
 
         this.infoOptionsAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item,
                 availableOptions);

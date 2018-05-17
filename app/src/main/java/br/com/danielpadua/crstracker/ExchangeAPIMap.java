@@ -9,8 +9,10 @@ import br.com.danielpadua.crstracker.model.CrsInfoListener;
 import br.com.danielpadua.crstracker.model.exchange.CFinex;
 import br.com.danielpadua.crstracker.model.exchange.Crex24;
 import br.com.danielpadua.crstracker.model.exchange.Exchange;
+import br.com.danielpadua.crstracker.model.exchange.FXCBit;
 import br.com.danielpadua.crstracker.restClient.CFinexRestClient;
 import br.com.danielpadua.crstracker.restClient.Crex24RestClient;
+import br.com.danielpadua.crstracker.restClient.FXCBitRestClient;
 import br.com.danielpadua.crstracker.restClient.RestClient;
 
 /**
@@ -23,6 +25,7 @@ public final class ExchangeAPIMap {
             //put(new Southxchange(), new SouthxchangeRestClient(context, infoListener));
             put(new CFinex(), new CFinexRestClient(context, infoListener));
             put(new Crex24(), new Crex24RestClient(context, infoListener));
+            put(new FXCBit(), new FXCBitRestClient(context, infoListener));
         }};
     }
 

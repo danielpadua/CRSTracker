@@ -199,6 +199,11 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements Widge
             this.remoteViews.setViewVisibility(R.id.widgetPairURL, View.VISIBLE);
         }
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         appWidgetManager.updateAppWidget(widgetTracker.getWidgetId(), this.remoteViews);
         startBrowsing(this.context, this.appWidgetManager, widgetTracker);
 
@@ -364,17 +369,17 @@ public class CRSTrackerWidgetProvider extends AppWidgetProvider implements Widge
                 break;
             case Low:
                 if (order == 0) {
-                    line1Label = "High: ";
+                    line1Label = "Low: ";
                     line1Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLow()) : formatFiatPrice(chosenTickerPrice.getLow());
                     this.remoteViews.setTextViewText(R.id.widgetLine1Label, line1Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine1Value, line1Value);
                 } else if (order == 1) {
-                    line2Label = "High: ";
+                    line2Label = "Low: ";
                     line2Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLow()) : formatFiatPrice(chosenTickerPrice.getLow());
                     this.remoteViews.setTextViewText(R.id.widgetLine2Label, line2Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine2Value, line2Value);
                 } else if (order == 2) {
-                    line3Label = "High: ";
+                    line3Label = "Low: ";
                     line3Value = !isFiat ? formatCryptoPrice(chosenTickerPrice.getLow()) : formatFiatPrice(chosenTickerPrice.getLow());
                     this.remoteViews.setTextViewText(R.id.widgetLine3Label, line3Label);
                     this.remoteViews.setTextViewText(R.id.widgetLine3Value, line3Value);
